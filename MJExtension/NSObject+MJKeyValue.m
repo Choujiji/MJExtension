@@ -329,6 +329,9 @@ static NSNumberFormatter *numberFormatter_;
                 value = [NSObject mj_keyValuesArrayWithObjectArray:value];
             } else if (propertyClass == [NSURL class]) {
                 value = [value absoluteString];
+            } else if (propertyClass == [NSDate class]) {//jiji - 转换为1970秒的NSNumber类型，用于支持NSDate
+                NSDate *dateValue = value;
+                value = @([dateValue timeIntervalSince1970]);
             }
             
             // 4.赋值
